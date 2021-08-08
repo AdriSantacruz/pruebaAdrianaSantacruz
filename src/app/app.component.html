@@ -1,0 +1,54 @@
+<div align="center">
+  <h1>LISTA DE PRODUCTOS REGISTRADOS</h1>
+  <table border="1" *ngIf="hayRegistros(); else sin">
+    <tr>
+      <td>ID</td>
+      <td>NOMBRE</td>
+      <td>DESCRIPCION</td>
+      <td>PRECIO</td>
+      
+    </tr>
+    <tr *ngFor="let producto of productos">
+      <td> {{producto.id }} </td>
+      <td> {{producto.nombre }} </td>
+      <td> {{producto.descripcion }} </td>
+      <td> {{producto.precio }} </td>
+      <td> <button (click)="deleteProducto(producto.id)"> Borrar </button> </td>
+      <td> <button (click)="getProducto(producto.id)" (click)="mostrarModalInfo()"> Seleccionar </button> </td>
+    </tr>
+  </table>
+
+  <ng-template #sin>
+    <p>No hay productos registrados.</p>
+  </ng-template>
+
+  <div>
+    <p> Nombre: <input type="text" [(ngModel)]="producto.nombre" /> </p>
+    <p> Descripcion: <input type="text" [(ngModel)]="producto.descripcion" /> </p>
+    <p> Precio: <input type="number" [(ngModel)]="producto.precio" /> </p>
+    <p> 
+      <button (click)="addProducto()"> AGREGAR </button> 
+     
+    </p>
+  </div>
+  
+  <ng-template #myModalInfo let-modal>
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Producto para Editar</h5>
+        
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close()"> 
+            <span aria-hidden="true">&times;</span>
+          </button>
+          
+      </div>
+      <div class="modal-body">
+        <p> Nombre: <input type="text" [(ngModel)]="producto2[0].nombre" /> </p>
+        <p> Descripcion: <input type="text" [(ngModel)]="producto2[0].descripcion" /> </p>
+        <p> Precio: <input type="number" [(ngModel)]="producto2[0].precio" /> </p>
+        <button (click)="updateProducto()"> MODIFICAR </button> 
+      </div>
+    </div>
+  </ng-template>
+</div>
